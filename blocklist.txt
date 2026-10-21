@@ -1,0 +1,13 @@
+# dominios de anuncio youtube
+pubads.g.doubleclick.net
+securepubads.g.doubleclick.net
+googlesyndication.com
+pagead2.googlesyndication.com
+tpc.googlesyndication.com
+video-ad-stats.googlesyndication.com
+adservice.google.com
+ad.doubleclick.net
+googleadservices.com
+www.googletagservices.com
+static.doubleclick.net
+googleads.g.doubleclick.net
