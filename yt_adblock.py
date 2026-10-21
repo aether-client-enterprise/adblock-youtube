@@ -25,7 +25,7 @@ AD_DOMAINS = [
 STATE_DIR = os.path.join(os.getenv("APPDATA", os.path.expanduser("~")), "YTAdBlock")
 BLOCKLIST_FILE = os.path.join(STATE_DIR, "blocklist.txt")
 LOG_FILE = os.path.join(STATE_DIR, "adblock.log")
-GITHUB_RAW = "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main/blocklist.txt"
+GITHUB_RAW = "https://raw.githubusercontent.com/aether-client-enterprise/adblock-youtube/main/blocklist.txt"
 
 def log(msg):
     os.makedirs(STATE_DIR, exist_ok=True)
@@ -101,9 +101,8 @@ def main():
         sys.exit(1)
     os.makedirs(STATE_DIR, exist_ok=True)
     domains = load_blocklist()
-    if "SEU_USUARIO" not in GITHUB_RAW = "https://raw.githubusercontent.com/aether-client-enterprise/adblock-youtube/main/blocklist.txt"
-        sync_github(GITHUB_RAW)
-        domains = load_blocklist()
+    sync_github(GITHUB_RAW)
+    domains = load_blocklist()
     apply_hosts(domains)
     log(f"aplicados {len(domains)} dominios")
     print(f"bloqueados {len(domains)} dominios de anuncio do youtube.")
