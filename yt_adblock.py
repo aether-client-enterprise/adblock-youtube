@@ -1,8 +1,9 @@
 # language: Python 3, file: yt_adblock.py, target: Windows 10/11 x64, admin required
-# technique: hosts-file redirection + GitHub raw blocklist sync + local state folder
+# technique: hosts-file redirection + GitHub raw blocklist sync + DNS flush + admin verification
 import ctypes
 import os
 import sys
+import subprocess
 import urllib.request
 from datetime import datetime
 
@@ -21,6 +22,8 @@ AD_DOMAINS = [
     "www.googletagservices.com",
     "static.doubleclick.net",
     "googleads.g.doubleclick.net",
+    "ads.youtube.com",
+    "ytimg.com",
 ]
 STATE_DIR = os.path.join(os.getenv("APPDATA", os.path.expanduser("~")), "YTAdBlock")
 BLOCKLIST_FILE = os.path.join(STATE_DIR, "blocklist.txt")
@@ -31,6 +34,7 @@ def log(msg):
     os.makedirs(STATE_DIR, exist_ok=True)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(f"[{datetime.now():%Y-%m-%d %H:%M:%S}] {msg}\n")
+    print(msg)
 
 def is_admin():
     try:
@@ -94,6 +98,14 @@ def apply_hosts(domains):
     out.append(end_marker + "\n")
     with open(HOSTS, "w", encoding="utf-8") as f:
         f.writelines(out)
+    log(f"escritos {len(domains)} dominios no hosts")
+
+def flush_dns():
+    try:
+        subprocess.run(["ipconfig", "/flushdns"], capture_output=True)
+        log("dns flush executado")
+    except Exception as e:
+        log(f"dns flush falhou: {e}")
 
 def main():
     if not is_admin():
@@ -104,8 +116,8 @@ def main():
     sync_github(GITHUB_RAW)
     domains = load_blocklist()
     apply_hosts(domains)
+    flush_dns()
     log(f"aplicados {len(domains)} dominios")
-    print(f"bloqueados {len(domains)} dominios de anuncio do youtube.")
 
 if __name__ == "__main__":
     main()
