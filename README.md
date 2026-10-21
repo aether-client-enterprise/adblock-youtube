@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 \# ytadblock
 
 
@@ -76,3 +77,6 @@ o script grava 127.0.0.1 nos dominios de anuncio no arquivo hosts e sincroniza a
 
 pronto. estão salvos em C:\\Users\\joilton\\ytadblock\\. agora você sobe para o github e edita o GITHUB\_RAW com o link raw do seu repositorio.
 
+=======
+# adblock-youtube
+>>>>>>> origin/main

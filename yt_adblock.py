@@ -101,7 +101,7 @@ def main():
         sys.exit(1)
     os.makedirs(STATE_DIR, exist_ok=True)
     domains = load_blocklist()
-    if "SEU_USUARIO" not in GITHUB_RAW:
+    if "SEU_USUARIO" not in GITHUB_RAW = "https://raw.githubusercontent.com/aether-client-enterprise/adblock-youtube/main/blocklist.txt"
         sync_github(GITHUB_RAW)
         domains = load_blocklist()
     apply_hosts(domains)
